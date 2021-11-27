@@ -1,0 +1,33 @@
+extends layout 
+
+block content
+
+  h1 Update Book
+  h2= title
+  h3 By #{author}
+  if errors 
+    h3.error Man down!
+    p.error 
+      each error in errors 
+        span= error 
+        br
+  form(action=`/books/${id}/edit` method='POST')
+    p
+      label(for='title') Title
+      input#title(name='title' type='text')
+    p
+      label(for='author') Author
+      input#author(name='author' type='text')
+    p
+      label(for='genre') Genre
+      input#genre(name='genre' type='text')
+    p
+      label(for='year') Year
+      input#year(name='year' type='text')
+    p
+      input(type='submit' value='Update Book')
+  form(method='post' action=`/books/${id}/delete` onsubmit="return confirm('Do you really want to delete this book?');")
+    p
+      a.button(href='/') Cancel
+    p
+      input(type='submit' value='Delete Book')

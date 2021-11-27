@@ -1,0 +1,16 @@
+extends layout 
+
+block content 
+  head
+    title= title 
+
+  h1= title 
+  h2= author 
+  h3= genre
+  h3= year
+
+  
+
+  a(href="/books") &larr; back to books
+  span #{" "}|#{" "}
+  a(href=`/books/${id}/edit`) update
