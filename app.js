@@ -60,7 +60,11 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render("error");
+  if (err.status === 404) {
+    res.render("page-not-found");
+  } else {
+    res.render("error", { error: err, status: err.status });
+  }
 });
 
 module.exports = app;
