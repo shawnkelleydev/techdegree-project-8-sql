@@ -86,10 +86,12 @@ router.post(
         book = await Book.findByPk(req.params.id);
         const arr = [];
         await error.errors.forEach((error) => arr.push(error.message));
+        console.log(arr);
         res.render("update-book", {
           errors: arr,
           title: book.title,
           author: book.author,
+          id: book.id,
         });
       }
     }
