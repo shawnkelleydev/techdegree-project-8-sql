@@ -42,34 +42,19 @@ router.post("/new", async function (req, res) {
   }
 });
 
-// router.get(
-//   "/:id",
-//   asyncHandler(async function (req, res, next) {
-//     var book = await Book.findByPk(req.params.id);
-//     // book = book.dataValues;
-//     if (book) {
-//       res.render("book-details", {
-//         title: book.title,
-//         author: book.author,
-//         genre: book.genre,
-//         year: book.year,
-//         id: book.id,
-//       });
-//     } else {
-//       res.render("page-not-found");
-//     }
-//   })
-// );
-
 router.get(
   "/:id",
   asyncHandler(async function (req, res, next) {
     const book = await Book.findByPk(req.params.id);
-    res.render("update-book", {
-      title: book.title,
-      author: book.author,
-      id: book.id,
-    });
+    try {
+      res.render("update-book", {
+        title: book.title,
+        author: book.author,
+        id: book.id,
+      });
+    } catch (err) {
+      next(err);
+    }
   })
 );
 
