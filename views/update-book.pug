@@ -11,7 +11,7 @@ block content
       each error in errors 
         span= error 
         br
-  form(action=`/books/${id}/edit` method='POST')
+  form(action=`/books/${id}` method='POST')
     p
       label(for='title') Title
       input#title(name='title' type='text')

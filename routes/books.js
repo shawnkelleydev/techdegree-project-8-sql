@@ -42,27 +42,27 @@ router.post("/new", async function (req, res) {
   }
 });
 
-router.get(
-  "/:id",
-  asyncHandler(async function (req, res, next) {
-    var book = await Book.findByPk(req.params.id);
-    // book = book.dataValues;
-    if (book) {
-      res.render("book-details", {
-        title: book.title,
-        author: book.author,
-        genre: book.genre,
-        year: book.year,
-        id: book.id,
-      });
-    } else {
-      res.render("page-not-found");
-    }
-  })
-);
+// router.get(
+//   "/:id",
+//   asyncHandler(async function (req, res, next) {
+//     var book = await Book.findByPk(req.params.id);
+//     // book = book.dataValues;
+//     if (book) {
+//       res.render("book-details", {
+//         title: book.title,
+//         author: book.author,
+//         genre: book.genre,
+//         year: book.year,
+//         id: book.id,
+//       });
+//     } else {
+//       res.render("page-not-found");
+//     }
+//   })
+// );
 
 router.get(
-  "/:id/edit",
+  "/:id",
   asyncHandler(async function (req, res, next) {
     const book = await Book.findByPk(req.params.id);
     res.render("update-book", {
@@ -74,13 +74,13 @@ router.get(
 );
 
 router.post(
-  "/:id/edit",
+  "/:id",
   asyncHandler(async function (req, res, next) {
     let book;
     try {
       book = await Book.findByPk(req.params.id);
       await book.update(req.body);
-      res.redirect(`/books/${book.id}`);
+      res.redirect("/books");
     } catch (error) {
       if (error.name === "SequelizeValidationError") {
         book = await Book.findByPk(req.params.id);
